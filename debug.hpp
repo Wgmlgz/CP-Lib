@@ -104,6 +104,9 @@ struct dbstream {
     int pos = 0;
     for (auto& i : c) {
       if (pos) os << " ";
+      #ifdef IDS
+      os << KEYCOLOR << pos << CUR + ":";
+      #endif
       os << i;
       ++pos;
     }
