@@ -1,11 +1,14 @@
+// by Wgmlgz
+
 #pragma once
 #include <bits/stdc++.h>
 
 const int INF = 1000 * 1000 * 1000;
 
+
+#pragma region
 template<typename T>
 class SegTree {
-  T default_val;
   std::function<T(const T&, const T&)> seg_merge;
 
   std::vector<T> base;
@@ -21,7 +24,7 @@ class SegTree {
 
   std::pair<bool, T> getRange(int pos, int ql, int qr, int l, int r) {
     if (ql <= l and qr >= r) return { true, tree[pos] };
-    if (qr <= l or ql >= r) return { false, default_val };
+    if (qr <= l or ql >= r) return { false, T() };
 
     int m = l + (r - l) / 2;
     auto r1 = getRange(pos * 2, ql, qr, l, m);
@@ -40,11 +43,10 @@ class SegTree {
   }
 
 public:
-  SegTree(const std::vector<T>& v, const T& default_val, std::function<T(const T&, const T&)> seg_merge) {
+  SegTree(const std::vector<T>& v, std::function<T(const T&, const T&)> seg_merge) {
     this->seg_merge = seg_merge;
-    this->default_val = default_val;
     base = v;
-    tree.resize(4 * base.size(), default_val);
+    tree.resize(4 * base.size());
     build(1, 0, base.size());
   }
   T getRange(int l, int r) {
@@ -57,17 +59,17 @@ public:
 
 template <typename T>
 struct SegSumT : public SegTree<T> {
-  SegSumT(const std::vector<T>& v) : SegTree<T>::SegTree(v, static_cast<T>(0), [](auto a, auto b) { return a + b; }) {}
+  SegSumT(const std::vector<T>& v) : SegTree<T>::SegTree(v, [](auto a, auto b) { return a + b; }) {}
 };
 
 template <typename T>
 struct SegMinT : public SegTree<T> {
-  SegMinT(const std::vector<T>& v) : SegTree<T>::SegTree(v, INF, [](auto a, auto b) { return std::min(a, b); }) {}
+  SegMinT(const std::vector<T>& v) : SegTree<T>::SegTree(v, [](auto a, auto b) { return std::min(a, b); }) {}
 };
 
 template <typename T>
 struct SegMaxT : public SegTree<T> {
-  SegMaxT(const std::vector<T>& v) : SegTree<T>::SegTree(v, -INF, [](auto a, auto b) { return std::max(a, b); }) {}
+  SegMaxT(const std::vector<T>& v) : SegTree<T>::SegTree(v, [](auto a, auto b) { return std::max(a, b); }) {}
 };
 
 typedef SegSumT<int64_t> SegSum;
@@ -84,3 +86,4 @@ typedef SegMaxT<int64_t> SegMax;
 typedef SegMaxT<long double> SegMaxLD;
 typedef SegMaxT<double> SegMaxD;
 typedef SegMaxT<int> SegMaxI;
+#pragma endregion

@@ -9,8 +9,7 @@ struct DSU {
   }
 
   int find(int v) {
-    if (v == parent[v])
-      return v;
+    if (v == parent[v]) return v;
     return parent[v] = this->find(parent[v]);
   }
 
@@ -18,15 +17,14 @@ struct DSU {
     a = this->find(a);
     b = this->find(b);
     if (a != b) {
-      if (rank[a] < rank[b])
-        std::swap(a, b);
+      if (rank[a] < rank[b]) std::swap(a, b);
       parent[b] = a;
-      if (rank[a] == rank[b])
-        rank[a]++;
+      if (rank[a] == rank[b]) rank[a]++;
     }
   }
   DSU(int n) {
     parent.resize(n);
     rank.resize(n);
+    for (int i = 0; i < n; ++i) this->make(i);
   }
 };

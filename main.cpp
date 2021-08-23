@@ -1,20 +1,22 @@
 // #define ONLINE_JUDGE
+// #define IDS
+
 #pragma region
-// #pragma GCC target ("avx2")
-// #pragma GCC optimization ("O3")
-// #pragma GCC optimization ("unroll-loops")
+#pragma GCC target ("avx2")
+#pragma GCC optimization ("O3")
+#pragma GCC optimization ("unroll-loops")
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 using namespace std;
 #define int int64_t
-const int MOD = 1e9 + 7; const int INF = 1e9; const int64_t inf = 1e18;
-typedef string str;typedef int64_t ll;template<typename T>using vec = vector<T>;typedef pair<int, int> ii;typedef vec<int> vi;typedef vec<ii> vii;typedef vec<vi> vvi;
-template<typename T, typename CMP = less<T>> using oset = tree<T, null_type, CMP, rb_tree_tag, tree_order_statistics_node_update>;
-template<typename KEY, typename VAL, typename CMP = less<KEY>> using omap = tree<KEY, VAL, CMP, rb_tree_tag, tree_order_statistics_node_update>;
+int MOD = 1e9+7;int INF=1e9;int64_t inf=1e18;
+typedef string str;typedef int64_t ll;template<typename T>using vec=vector<T>;typedef pair<int,int>ii;typedef vec<int>vi;typedef vec<ii> vii;typedef vec<vi> vvi;
+template<typename T,typename CMP=less<T>> using oset=tree<T,null_type,CMP,rb_tree_tag,tree_order_statistics_node_update>;
+template<typename KEY,typename VAL,typename CMP=less<KEY>> using omap = tree<KEY, VAL, CMP, rb_tree_tag, tree_order_statistics_node_update>;
 template<typename T = int> auto arr2(int x, int y, const T& val = 0) { return vec<vec<T>>(x, vec<T>(y, val)); }
-template<typename T = int> auto arr3(int x, int y, int z, const T& val = 0) { return vec<vec<vec<T>>>(x, vec<vec<T>>(y, vec<T>(z, val))); }
+template<typename T = int> auto arr3(int x, int y, int z, const T& val = 0) { return vec<vec<vec<T>>>(x, vec<vec<T>>(y, vec<T>(z, val))); }auto& out = cout;
 #define hmap unordered_map
 #define hset unordered_set
 #define GET_MACRO2(_1,_2,NAME,...) NAME
@@ -28,6 +30,7 @@ template<typename T = int> auto arr3(int x, int y, int z, const T& val = 0) { re
 #define lb lower_bound
 #define ub upper_bound
 #define pb push_back
+#define em emplace
 #define eb emplace_back
 #define F first
 #define S second
@@ -37,39 +40,39 @@ template<typename T = int> auto arr3(int x, int y, int z, const T& val = 0) { re
 #define flp(a,b,x) for(auto&[a,b]:x)
 #define flpc(a,b,x) for(auto[a,b]:x)
 #define fo_2(i,n) for(int i=0;i<n;i++)
-#define fo_3(i,k,n) for(int i=k;k<n?i<n:i>n;k<n?++i:--i)
-#define fo_4(i,a,b,c) for(int i=a;a<b?i<b:i>b;i+=c)
+#define fo_3(i,k,n) for(int i=k;i<n;++i)
+#define fo_4(i,a,b,c) for(int i=a;i<b;i+=c)
 #define fou(i, k, n) for(int i=k;i<n;++i)
 #define fod(i, k, n) for(int i=k;i>n;--i)
 #define fo(...) GET_MACRO4(__VA_ARGS__,fo_4,fo_3,fo_2,fo_1)(__VA_ARGS__)
-auto& out = cout;
 #define db dd<< 
 #define o outs<<
 #define O out<<
 #define I in>>
-#define flsh cout.flush()
+#define flsh {cout.flush()}
 #define endl "\n"
 #define yes {o "YES";}
 #define no {o "NO";}
 #define yesr {yes; return;}
 #define nor {no; return;}
 #define all(x) (x).bg,(x).ed
+template <typename T>inline bool emax(T& a, T b) {if (a < b) {a = b;return true;}return false;}template <typename T>inline bool emin(T& a, T b) {if (a > b) {a = b;return true;}return false;}
 template<typename TC, typename T> auto FIND(const TC& cont, const T& x) { return find(all(cont), x); }template<typename TC, typename T> bool IN(const TC& cont, const T& x) { return FIND(cont, x) != cont.ed; }
-#define iv(v,n) vec<ll>v(n);fl(i,v){I i;}
-#define im(v,n,m) vec<vec<int>>v(n, vec<int>(m));fl(i,v){fl(j,i)I j;}
-#define ints_1(a) ll a; I a;
-#define ints_2(a,b) ll a,b; I a>>b;
-#define ints_3(a,b,c) ll a,b,c;I a>>b>>c;
-#define ints_4(a,b,c,d) ll a,b,c,d; I a>>b>>c>>d;
-#define ints(...) GET_MACRO4(__VA_ARGS__,ints_4,ints_3,ints_2,ints_1)(__VA_ARGS__)
-#define ct continue
-#define eve %2==0
-#define odd %2
+#define rv(v,n) vec<ll>v(n);fl(i,v){I i;}
+#define rs(s) str s; I s;
+#define rm(v,n,m) vec<vec<int>>v(n, vec<int>(m));fl(i,v){fl(j,i)I j;}
+#define ri_1(a) ll a; I a;
+#define ri_2(a,b) ll a,b; I a>>b;
+#define ri_3(a,b,c) ll a,b,c;I a>>b>>c;
+#define ri_4(a,b,c,d) ll a,b,c,d; I a>>b>>c>>d;
+#define ri(...) GET_MACRO4(__VA_ARGS__,ri_4,ri_3,ri_2,ri_1)(__VA_ARGS__)
+#define ct {continue;}
+#define br {break;}
 #define dig -'0'
 #define let -'a'
 #define LET -'A'
 template <typename T> void on(T t) { O t << "\n"; }template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...); }
-string getInput();bool getTests(); void solve(int);void preSolve();void solve(int); void presolve();
+template <typename T>int sgn(T val) {return (T(0) < val) - (val < T(0));} string getInput();bool getTests(); void solve(int);void preSolve();void solve(int); void presolve();
 string bits(int c, const size_t s = 10) { return bitset<64>(c).to_string().substr(64 - s, s); }  void yn(bool x) { on(x ? "YES" : "NO"); }
 template<typename T>void sort(T& c) { sort(c.begin(), c.end()); }template<typename T>void rev(T& c) { reverse(c.begin(), c.end()); }
 template<typename T>void unq(T& c) { c.erase(unique(c.begin(), c.end()), c.end()); }template<class T>auto sum(T& c) { return accumulate(c.begin(), c.end(), 0LL); }
@@ -97,10 +100,11 @@ dbstream dd(out);struct INPUT { template<typename T>operator T() { T t; I t; ret
 #define hf void presolve()
 #define code void solve(int TT) 
 #pragma endregion
-tests 1 input R"(
+tests 0 input R"(
 
-)"/**/ gl hf{}
+)" /**/ gl hf {}
 
-code{
+
+code {
   
 }
