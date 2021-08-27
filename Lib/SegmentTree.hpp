@@ -1,5 +1,3 @@
-// by Wgmlgz
-
 #pragma once
 #include <bits/stdc++.h>
 
@@ -9,6 +7,7 @@ const int INF = 1000 * 1000 * 1000;
 #pragma region
 template<typename T>
 class SegTree {
+  /* by Wgmlgz */
   std::function<T(const T&, const T&)> seg_merge;
 
   std::vector<T> base;
