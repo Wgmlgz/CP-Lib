@@ -130,7 +130,7 @@ struct dbstream {
       auto t = CUR;
       CUR = CURS + KEYCOLOR;
 
-      os << to_string(pos) + ": " + RESET + MCOLOR;
+      os << std::to_string(pos) + ": " + RESET + MCOLOR;
       CUR = t;
       dbprint(i);
       ++pos;
@@ -235,7 +235,7 @@ dbstream& operator << (dbstream& dbs, const T& t) {
 #define _MAP() MAP
 #pragma endregion
 
-#undef deb
+#undef gg
 
 #define _deb(x) dd.printName(#x);dd.print(x);dd.os<<" ";
-#define deb(...) {EVAL(MAP(_deb,__VA_ARGS__)) dd.os<<"\n";}
+#define gg(...) {EVAL(MAP(_deb,__VA_ARGS__)) dd.os<<"\n";}

@@ -21,6 +21,31 @@ inline std::vector<T> fc(T n) {
   return res;
 }
 
+/* unique factorization */
+template <typename T>
+inline std::vector<T> ufc(T n) {
+  std::vector<T> res;
+  for (T d = 2; d * d <= n; d++) {
+    if (n % d == 0) res.push_back(d);
+    while (n % d == 0) n /= d;
+  }
+  if (n > 1) res.push_back(n);
+  return res;
+}
+
+/* number divisors */
+template <typename T>
+inline std::vector<T> divs(T n) {
+  std::vector<T> res;
+  for (T d = 1; d * d <= n; d++)
+    if (n % d == 0) {
+      res.push_back(d);
+      res.push_back(n / d);
+    }
+  sort(res);
+  unq(res);
+  return res;
+}
 /* factorial */
 template <typename T>
 inline T mfact(T n, T m = MOD) {
